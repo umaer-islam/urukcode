@@ -1,0 +1,8 @@
+# UrukCode
+
+Live: https://umaer-islam.github.io/urukcode/
+Repo: https://github.com/umaer-islam/urukcode
+Developer: Umaer Islam (https://umaerislam.com)
+License: MIT
+
+Static web app. QR code generator (URL, text, WiFi, vCard, email, phone, SMS, geo). Barcode generator (CODE128, EAN-13, UPC, CODE39, CODE93, EAN-8, UPC-E, ITF-14, ITF, MSI, Pharmacode, Codabar). QR decoder from image upload. Export PNG/SVG. Client-side only. No data leaves the browser.
