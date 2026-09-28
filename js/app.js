@@ -23,7 +23,6 @@
     const typeGrid = $('#type-grid');
     const typeCells = $$('.type-cell');
     const qrType = $('#qr-type');
-    const qrFields = $('#qr-fields');
     const historyList = $('#history-list');
 
     const qrInputIds = ['qr-text', 'qr-email', 'qr-phone', 'qr-sms-phone', 'qr-sms-msg', 'qr-wifi-ssid', 'qr-wifi-pass', 'qr-wifi-enc', 'qr-wifi-hidden', 'qr-vc-name', 'qr-vc-phone', 'qr-vc-email', 'qr-vc-org', 'qr-vc-addr', 'qr-geo-lat', 'qr-geo-lon'];
@@ -50,6 +49,44 @@
         el.innerHTML = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M20 6L9 17l-5-5"/></svg>';
         document.body.appendChild(el);
         el.addEventListener('animationend', () => el.remove());
+    }
+
+    // ─── Lazy CDN libs (pinned + SRI) ───
+    const LIBS = {
+        barcode: {
+            src: 'https://cdn.jsdelivr.net/npm/jsbarcode@3.11.6/dist/JsBarcode.all.min.js',
+            integrity: 'sha384-Kk5SjBOKprEnGfyBWfD2zROFd1Cu8kwOXxG2GIhYPcoDL2rBJS9P8Ud1ZMy4412a'
+        },
+        jsqr: {
+            src: 'https://cdn.jsdelivr.net/npm/jsqr@1.4.0/dist/jsQR.min.js',
+            integrity: 'sha384-hStSInNIZ8ljtOVrmrgf7zdHMapaLBWoSnPTtF0nzsybp4+LuhDz6sHuEVpWIX8o'
+        }
+    };
+    const libPromises = {};
+    let libErrorShown = false;
+
+    function onLibError() {
+        if (libErrorShown) return;
+        libErrorShown = true;
+        toast('Could not load library — check your connection', 'fail');
+    }
+
+    function loadLib(name) {
+        if (libPromises[name]) return libPromises[name];
+        libPromises[name] = new Promise((resolve, reject) => {
+            const s = document.createElement('script');
+            s.src = LIBS[name].src;
+            s.integrity = LIBS[name].integrity;
+            s.crossOrigin = 'anonymous';
+            s.onload = () => { libErrorShown = false; resolve(); };
+            s.onerror = () => {
+                delete libPromises[name];
+                onLibError();
+                reject(new Error('Failed to load ' + name));
+            };
+            document.head.appendChild(s);
+        });
+        return libPromises[name];
     }
 
     // ─── Theme ───
@@ -263,6 +300,8 @@
         ['#btn-dl-png', '#btn-dl-svg', '#btn-copy'].forEach(id => {
             $(id).disabled = !exportable;
         });
+        if (mode === 'barcode') loadLib('barcode').catch(() => {});
+        else if (mode === 'decode') loadLib('jsqr').catch(() => {});
     }
 
     tabs.forEach(t => t.addEventListener('click', () => switchMode(t.dataset.mode)));
@@ -506,6 +545,13 @@
     function genBC() {
         const data = $('#bc-data').value.trim();
         if (!data) { bcSvg.innerHTML = ''; return; }
+        if (typeof JsBarcode === 'undefined') {
+            bcSvg.innerHTML = '<text x="50%" y="50%" text-anchor="middle" fill="#9898aa" font-size="14">Loading…</text>';
+            loadLib('barcode').then(genBC, () => {
+                bcSvg.innerHTML = '<text x="50%" y="50%" text-anchor="middle" fill="#ef4444" font-size="14">Library failed to load</text>';
+            });
+            return;
+        }
         try {
             JsBarcode(bcSvg, data, {
                 format: $('#bc-format').value,
@@ -600,7 +646,10 @@
                 const ctx = c.getContext('2d');
                 ctx.drawImage(img, 0, 0, c.width, c.height);
                 const data = ctx.getImageData(0, 0, c.width, c.height);
-                if (typeof jsQR === 'undefined') { showDecodeError(); return; }
+                if (typeof jsQR === 'undefined') {
+                    loadLib('jsqr').then(() => decodeImg(file), showDecodeError);
+                    return;
+                }
                 const code = jsQR(data.data, data.width, data.height);
                 if (code) {
                     $('#dec-content').textContent = code.data;

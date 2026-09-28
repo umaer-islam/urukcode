@@ -1,0 +1,33 @@
+# UrukCode (Uruk code)
+
+> Free, open-source QR code and barcode generator that runs entirely in your browser. No signup, no server, no data ever leaves the device.
+
+UrukCode — also searched as "Uruk code" — creates QR codes (URL, plain text, WiFi, vCard, email, phone, SMS, GPS location) and barcodes (CODE128, CODE39, CODE93, EAN-13, EAN-8, UPC-A, UPC-E, ITF-14, ITF, MSI, Pharmacode, Codabar), decodes QR codes from uploaded images, and exports results as PNG or SVG files.
+
+## Key facts
+
+- Price: free forever — no signup, no account, no usage limits
+- Privacy: 100% client-side processing; content is never uploaded to a server
+- Tracking: none — no analytics cookies and no third-party tracking
+- Export formats: PNG and SVG
+- QR types: text, URL, WiFi, vCard, email, phone, SMS, GPS location
+- Barcode formats: 12+ (CODE128, CODE39, CODE93, EAN-13, EAN-8, UPC-A, UPC-E, ITF-14, ITF, MSI, Pharmacode, Codabar)
+- QR decoding: yes — upload PNG/JPG/WebP, read locally
+- License: MIT (open source)
+- Author: Umaer Islam — https://umaerislam.com
+- Source code: https://github.com/umaer-islam/urukcode
+- Live site: https://umaer-islam.github.io/urukcode/
+
+## FAQ (short answers)
+
+- Is UrukCode free? Yes — 100% free, MIT-licensed, no limits or watermarks.
+- Does UrukCode upload my data? No — everything runs in the browser; there is no backend.
+- Do I need an account? No signup or installation required.
+- Can it decode a QR code from an image? Yes — the Decode QR tab reads PNG/JPG/WebP locally.
+- Does it work offline? Yes — after the page loads, generation works without a server.
+
+## Optional
+
+- [Repository](https://github.com/umaer-islam/urukcode): source code, changelog, and issue tracker
+- [Author](https://umaerislam.com): portfolio and contact details of the developer
+- [License](https://github.com/umaer-islam/urukcode/blob/main/LICENSE): MIT license terms

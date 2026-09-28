@@ -1,8 +1,4 @@
 User-agent: *
 Allow: /
-Disallow: /ai.txt
 
 Sitemap: https://umaer-islam.github.io/urukcode/sitemap.xml
-
-# UrukCode — Free QR Code & Barcode Generator by Umaer Islam
-# https://umaerislam.com

@@ -1,6 +1,6 @@
 # UrukCode
 
-Free QR code and barcode generator. Create QR codes (URL, text, WiFi, vCard, email, phone, SMS, location) and barcodes (CODE128, EAN-13, EAN-8, UPC, ITF, CODE39, CODE93, MSI, Pharmacode, Codabar). Decode QR from images. Export PNG/SVG.
+Free QR code and barcode generator — also known as **Uruk code**. Create QR codes (URL, text, WiFi, vCard, email, phone, SMS, location) and barcodes (CODE128, EAN-13, EAN-8, UPC, ITF, CODE39, CODE93, MSI, Pharmacode, Codabar). Decode QR from images. Export PNG/SVG.
 
 **[Live](https://umaer-islam.github.io/urukcode/)** | [Source Code](https://github.com/umaer-islam/urukcode)
 
@@ -23,6 +23,11 @@ npx serve .
 ```
 
 Open `http://localhost:3000` in your browser. No build step required.
+
+```bash
+npm install   # dev tooling only (linting) — not needed to run the site
+npm run lint
+```
 
 ## Features
 
