@@ -36,4 +36,4 @@ Open `http://localhost:3000` in your browser. No build step required.
 
 ## License
 
-MIT License — [Umaer Islam](https://umaerislam.com)
+MIT License — see [LICENSE](LICENSE). [Umaer Islam](https://umaerislam.com)

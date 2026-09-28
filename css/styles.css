@@ -417,6 +417,7 @@ input[type="file"] { display: none; }
 }
 .btn svg { width: 16px; height: 16px; position: relative; z-index: 2; }
 .btn span { position: relative; z-index: 2; }
+.btn:disabled { opacity: 0.45; pointer-events: none; cursor: not-allowed; }
 
 .btn-pri {
     background: var(--grad-main); color: #fff;
@@ -733,6 +734,10 @@ input[type="file"] { display: none; }
     padding-left: 1rem;
 }
 .cs-opt.cs-selected::before { transform: translateY(-50%) scaleY(1); }
+.cs-opt.cs-kb {
+    background: var(--purple-dim); color: var(--tx);
+}
+.cs-opt.cs-kb::before { transform: translateY(-50%) scaleY(1); }
 .cs-opt .cs-check,
 .cs-option .cs-check {
     width: 14px; height: 14px; opacity: 0; transform: scale(0);
